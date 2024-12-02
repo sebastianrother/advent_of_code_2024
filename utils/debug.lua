@@ -1,6 +1,6 @@
 M = {}
 
-function M.dump(data)
+function dump(data)
   if type(data) ~= 'table' then return tostring(data) end
 
   local prefix = '{\n'
@@ -8,9 +8,11 @@ function M.dump(data)
   local result = ''
   for key, value in pairs(data) do
     if type(key) ~= 'number' then key = '"' .. key .. '"' end -- If key is not a number, put it in quotes
-    result = result .. '[' .. key .. '] = "' .. M.dump(value) .. '",\n'
+    result = result .. '[' .. key .. '] = "' .. dump(value) .. '",\n'
   end
   return prefix .. result .. suffix
 end
+
+M.dump = dump
 
 return M
