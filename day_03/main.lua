@@ -1,7 +1,5 @@
-d = require('utils.debug')
-s = require('utils.string')
-t = require('utils.test')
-f = require('utils.file')
+local t = require('utils.test')
+local f = require('utils.file')
 
 local MULTIPLICATION_PATTERN = "mul%((%d+),(%d+)%)"
 local function part_01(input_data)
@@ -21,18 +19,18 @@ local function part_02(input_data)
   for row_num, row in pairs(input_data) do
     local start_pos = 0
     while true do
-      mul_start, mul_end, mul_1, mul_2 = string.find(row, MULTIPLICATION_PATTERN, start_pos)
-      do_start, do_end = string.find(row, 'do%(%)', start_pos)
-      dont_start, dont_end = string.find(row, 'don%\'t%(%)', start_pos)
+      local mul_start, mul_end, mul_1, mul_2 = string.find(row, MULTIPLICATION_PATTERN, start_pos)
+      local do_start, do_end = string.find(row, 'do%(%)', start_pos)
+      local dont_start, dont_end = string.find(row, 'don%\'t%(%)', start_pos)
 
 
-      if do_start ~= nil and mul_start~=nil and (do_start< mul_start) then
+      if do_start ~= nil and do_end ~= nil and mul_start~=nil and (do_start< mul_start) then
         mode = 'DO'
         start_pos = do_end
         goto continue
       end
 
-      if dont_start ~= nil and mul_start~=nil and (dont_start< mul_start) then
+      if dont_start ~= nil and dont_end ~= nil and mul_start~=nil and (dont_start< mul_start) then
         mode = 'DONT'
         start_pos = dont_end
         goto continue
