@@ -6,6 +6,9 @@ local function _file_exists(file_path)
   return file ~= nil
 end
 
+---Reads file contents and returns table of lines
+---@param file_path string
+---@return string[]
 function M.get_file_contents(file_path)
   if not _file_exists(file_path) then return {} end
   local lines = {}
@@ -16,4 +19,3 @@ function M.get_file_contents(file_path)
 end
 
 return M
-

@@ -105,9 +105,6 @@ function parse_antennas(input_data)
   return antennas
 end
 
-
-
-
 function filter(input_table, filter_fn)
   local filter_table = {}
 
