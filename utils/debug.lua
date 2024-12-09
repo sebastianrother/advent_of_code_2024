@@ -8,7 +8,8 @@ function dump(data)
   local result = ''
   for key, value in pairs(data) do
     if type(key) ~= 'number' then key = '"' .. key .. '"' end -- If key is not a number, put it in quotes
-    result = result .. '\t[' .. key .. '] = "' .. dump(value) .. '",\n'
+    v = type(value) == 'table' and " " .. dump(value) or ' "' .. dump(value) .. '"'
+    result = result .. '\t[' .. key .. ']:' .. v .. ',\n'
   end
   return prefix .. result .. suffix
 end
