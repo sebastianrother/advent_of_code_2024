@@ -1,6 +1,6 @@
 M = {}
 
-function dump(data)
+function M.dump(data)
   if type(data) ~= 'table' then return tostring(data) end
 
   local prefix = '{\n'
@@ -14,6 +14,11 @@ function dump(data)
   return prefix .. result .. suffix
 end
 
-M.dump = dump
+function M.time(fn)
+  local start_time = os.clock()
+  local result = fn()
+  print("Elapsed time is: " .. os.clock() - start_time)
+  return result
+end
 
 return M
